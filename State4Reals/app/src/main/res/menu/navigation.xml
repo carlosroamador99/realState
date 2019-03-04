@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Inicio" />
+
+    <item
+        android:id="@+id/casas_fav"
+        android:icon="@drawable/casas_favs"
+        android:title="Favoritos" />
+
+    <item
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/ic_location_on_black_24dp"
+        android:title="Cercanos" />
+
+    <item
+        android:id="@+id/usuario"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="Usuario" />
+
+    <item
+        android:id="@+id/mis_casas"
+        android:icon="@drawable/ic_view_list_24dp"
+        android:title="Mis Casas" />
+</menu>

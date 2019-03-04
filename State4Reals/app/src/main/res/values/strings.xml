@@ -1,0 +1,19 @@
+<resources>
+    <string name="sharedpreferences_filename">login</string>
+    <string name="jwt_key">JWT_KEY</string>
+    <string name="id_user">ID_USER</string>
+    <string name="user">USER</string>
+    <string name="email">EMAIL</string>
+    <string name="avatar">AVATAR</string>
+
+
+    <string name="app_name">State4Reals</string>
+    <string name="title_activity_dash_board">DashBoard</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_localizacion">Map</string>
+</resources>
