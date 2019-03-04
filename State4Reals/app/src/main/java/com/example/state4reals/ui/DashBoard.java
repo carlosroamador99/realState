@@ -27,9 +27,7 @@ import com.example.state4reals.viewModel.CasaViewModel;
 public class DashBoard extends AppCompatActivity implements CasaInteractionListener, UserInteractionListener, OnCasaFavInteractionListener, OnMyCasaInteractionListener {
 
     private TextView mTextMessage;
-
-
-    private Fragment fCasas, fUsuarios;
+    private Fragment fCasas;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -48,7 +46,12 @@ public class DashBoard extends AppCompatActivity implements CasaInteractionListe
                     //mTextMessage.setText(R.string.title_dashboard);
                     break;
                 case R.id.casas_fav:
-                    f = new CasasFavFragment();
+                    if(UtilToken.getToken(DashBoard.this) == null) {
+                        startActivity(new Intent(DashBoard.this, Login.class));
+                        finish();
+                    }else{
+                        f = new CasasFavFragment();
+                    }
                     break;
                 case R.id.mis_casas:
                     if(UtilToken.getToken(DashBoard.this) == null) {
@@ -100,7 +103,7 @@ public class DashBoard extends AppCompatActivity implements CasaInteractionListe
     @Override
     public void onClickFav(String id) {
         CasaViewModel viewModel = ViewModelProviders.of(this).get(CasaViewModel.class);
-        
+
         if (UtilToken.getToken(this) != null){
             viewModel.setFavCasa(UtilToken.getToken(DashBoard.this), id);
             Toast.makeText(this, "Añadido a Favoritos", Toast.LENGTH_LONG).show();

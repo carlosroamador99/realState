@@ -17,6 +17,8 @@ import com.example.state4reals.R;
 import com.example.state4reals.model.Casa;
 import com.example.state4reals.retrofit.UtilToken;
 import com.example.state4reals.retrofit.services.CasaInteractionListener;
+import com.example.state4reals.ui.DashBoard;
+import com.example.state4reals.viewModel.CasaViewModel;
 
 
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.List;
 
 public class MyCasasAdapter extends RecyclerView.Adapter<MyCasasAdapter.ViewHolder>{
 
+    private CasaViewModel viewModel;
     private List<Casa> mValues;
     private final CasaInteractionListener mListener;
     private Context ctx;
@@ -51,19 +54,37 @@ public class MyCasasAdapter extends RecyclerView.Adapter<MyCasasAdapter.ViewHold
         holder.precio.setText(Integer.toString(holder.mItem.getPrice()));
         holder.tamanio.setText(Integer.toString(holder.mItem.getSize()));
 
-        holder.check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (UtilToken.getToken(ctx) != null) {
-                    mListener.onClickFav(holder.mItem.getId());
-                    ColorFilter filter = new LightingColorFilter(Color.GREEN, Color.GREEN);
-                    holder.check.setColorFilter(filter);
-                } else {
-                    Toast.makeText(ctx, "Logéate", Toast.LENGTH_LONG).show();
+        if(holder.mItem.isFav()) {
+            ColorFilter filter = new LightingColorFilter(Color.GREEN, Color.GREEN);
+            holder.check.setColorFilter(filter);
+            holder.check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (UtilToken.getToken(ctx) != null) {
+                        mListener.onClickFav(holder.mItem.getId());
+                        viewModel.setOffFavCasa(UtilToken.getToken(ctx), holder.mItem.getId());
+                        Toast.makeText(ctx, "Añadido a Favoritos", Toast.LENGTH_LONG).show();
+                        ColorFilter filter = new LightingColorFilter(Color.RED, Color.RED);
+                        holder.check.setColorFilter(filter);
+                    } else {
+                        Toast.makeText(ctx, "Logéate", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
-
+            });
+        } else {
+            holder.check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (UtilToken.getToken(ctx) != null) {
+                        mListener.onClickFav(holder.mItem.getId());
+                        ColorFilter filter = new LightingColorFilter(Color.GREEN, Color.GREEN);
+                        holder.check.setColorFilter(filter);
+                    } else {
+                        Toast.makeText(ctx, "Logéate", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
         if (holder.mItem.getPhotos() != null) {
             Glide
                     .with(ctx)
